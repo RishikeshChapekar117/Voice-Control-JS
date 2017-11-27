@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+</head>
+<body>
+<!-- <div style="background-color: yellow; font-size: 40px; text-align: center;  height: 70px;">Hello there! How may i help you?</div> -->
+<!-- <div style="background-color: pink; font-size: 40px; text-align: center; height: 60px">Ask me something</div> -->
+<!-- <div id="result", style="background-color: red; height: 846px; text-align: center;font-size: 40px;"></div> -->
+    <script src="p5.min.js"></script>
+    <!-- <script src="../addons/p5.dom.min.js"></script> -->
+    <!-- <script src="../addons/p5.sound.min.js"></script> -->
+<script src="/annyang.js"></script>
+<script>
+		// document.getElementById("result").innerHTML = "working";--used for annyang testing
+	if(annyang){
+		console.log("working fine!");
+		console.log("check");
+		// document.getElementById("result").innerHTML = "OK";
+		var commands = {
+			"left": function(){
+				control("left");
+				console.log("turned left");
+				// document.getElementById("result").innerHTML="Hello there puny human";
+			},
+			"right": function(){
+				control("right");
+				console.log("turned right");
+			},
+			"up": function(){
+				 control("up");
+				 console.log("up");
+			},
+			"down": function(){
+				control("down");
+			},
+			"stop": function(){
+				control("stop");
+			}
+		};
+		annyang.addCommands(commands);
+		annyang.start();
+	}
+	else{
+		console.log("no can do");
+	}
+	var x = 400;
+	var y = 400;
+	var xspeed = 0;
+	var yspeed = 0;
+	function setup(){
+		createCanvas(windowWidth, windowHeight);
+	}
+	function draw(){
+		background(0);
+		fill(255,0,0);
+		ellipse(x,y,40,40);
+		x += xspeed;
+		y +=yspeed;
+		if((y+40)>windowHeight || (y-40)<0){
+			yspeed = -yspeed;
+		}
+		if((x+40)>windowWidth || (x-40)<0){
+			xspeed = -xspeed;
+		}
+	}
+	function control(cmd){
+		switch(cmd){
+			case "left":
+				xspeed = -10; break;
+			case "right":
+				xspeed = 10; break;	
+			case "up":
+				yspeed = -10; break;	
+			case "down":
+				yspeed = 10; break;
+			case "stop":
+				xspeed = 0;
+				yspeed = 0;	
+				break;	
+		}
+	}
+</script>
+</body>
+</html>
